@@ -54,17 +54,17 @@ export const StateContext = ({ children }) => {
       setTotalPrice((prev) => prev + foundProduct.price);
       setTotalQunatitys((prev) => prev + 1);
     } else if (value === "dec") {
-      const updatedItem = {
-        ...foundProduct,
-        quantity: foundProduct.quantity - 1,
-      };
-      updatedItems = [...cartItems];
-      updatedItems[index] = updatedItem;
       if (foundProduct.quantity > 1) {
+        const updatedItem = {
+          ...foundProduct,
+          quantity: foundProduct.quantity - 1,
+        };
+        updatedItems = [...cartItems];
+        updatedItems[index] = updatedItem;
         setCartItems([...updatedItems]);
         setTotalPrice((prev) => prev - foundProduct.price);
         setTotalQunatitys((prev) => prev - 1);
-      } else return;
+      }
     }
   };
 
