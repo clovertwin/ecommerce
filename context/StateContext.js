@@ -7,7 +7,7 @@ export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalQuantitys, setTotalQunatitys] = useState(0);
+  const [totalQuantitys, setTotalQuantitys] = useState(0);
   const [qty, setqty] = useState(1);
 
   let foundProduct;
@@ -18,7 +18,7 @@ export const StateContext = ({ children }) => {
       (item) => item._id === product._id
     );
     setTotalPrice((prev) => prev + product.price * quantity);
-    setTotalQunatitys((prev) => prev + quantity);
+    setTotalQuantitys((prev) => prev + quantity);
     if (checkProductInCart) {
       const updatedCartItems = cartItems.map((cartProduct) => {
         if (cartProduct._id === product._id)
@@ -35,7 +35,7 @@ export const StateContext = ({ children }) => {
   const onRemove = (product) => {
     foundProduct = cartItems.find((item) => item._id === product._id);
     setTotalPrice((prev) => prev - foundProduct.price * foundProduct.quantity);
-    setTotalQunatitys((prev) => prev - foundProduct.quantity);
+    setTotalQuantitys((prev) => prev - foundProduct.quantity);
     setCartItems(cartItems.filter((item) => item._id !== product._id));
   };
 
@@ -52,7 +52,7 @@ export const StateContext = ({ children }) => {
       updatedItems[index] = updatedItem;
       setCartItems([...updatedItems]);
       setTotalPrice((prev) => prev + foundProduct.price);
-      setTotalQunatitys((prev) => prev + 1);
+      setTotalQuantitys((prev) => prev + 1);
     } else if (value === "dec") {
       if (foundProduct.quantity > 1) {
         const updatedItem = {
@@ -63,7 +63,7 @@ export const StateContext = ({ children }) => {
         updatedItems[index] = updatedItem;
         setCartItems([...updatedItems]);
         setTotalPrice((prev) => prev - foundProduct.price);
-        setTotalQunatitys((prev) => prev - 1);
+        setTotalQuantitys((prev) => prev - 1);
       }
     }
   };
@@ -80,8 +80,11 @@ export const StateContext = ({ children }) => {
         showCart,
         setShowCart,
         cartItems,
+        setCartItems,
         totalPrice,
+        setTotalPrice,
         totalQuantitys,
+        setTotalQuantitys,
         qty,
         incQty,
         decQty,
