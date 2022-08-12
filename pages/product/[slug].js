@@ -16,7 +16,8 @@ const ProductDetails = ({ product, products }) => {
     useStateContext();
 
   const handleBuyNow = () => {
-    if (cartItems.length) {
+    const isInCart = cartItems.find((item) => item._id === product._id);
+    if (isInCart) {
       setShowCart(true);
     } else {
       onAdd(product, qty);
