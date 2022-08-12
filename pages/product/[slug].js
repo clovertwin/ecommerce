@@ -12,11 +12,16 @@ import { Product } from "../../components";
 const ProductDetails = ({ product, products }) => {
   const [index, setIndex] = useState(0);
   const { image, name, details, price } = product;
-  const { incQty, decQty, qty, onAdd, setShowCart } = useStateContext();
+  const { incQty, decQty, qty, onAdd, setShowCart, cartItems } =
+    useStateContext();
 
   const handleBuyNow = () => {
-    onAdd(product, qty);
-    setShowCart(true);
+    if (cartItems.length) {
+      setShowCart(true);
+    } else {
+      onAdd(product, qty);
+      setShowCart(true);
+    }
   };
 
   return (
